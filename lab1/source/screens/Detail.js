@@ -1,3 +1,4 @@
+import { NativeBaseProvider } from "native-base";
 import React, { Component } from "react";
 import {
   View,
@@ -9,6 +10,7 @@ import {
 } from "react-native";
 
 import WheelOfFortune from "react-native-wheel-of-fortune";
+import Footer from "../components/footer/Footer";
 
 const participants = [
   "%10",
@@ -54,41 +56,45 @@ class App extends Component {
       onRef: (ref) => (this.child = ref),
     };
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle={"light-content"} />
-        <WheelOfFortune
-          options={wheelOptions}
-          getWinner={(value, index) => {
-            this.setState({ winnerValue: value, winnerIndex: index });
-          }}
-        />
-        {!this.state.started && (
-          <View style={styles.startButtonView}>
-            <TouchableOpacity
-              onPress={() => this.buttonPress()}
-              style={styles.startButton}
-            >
-              <Text style={styles.startButtonText}>Spin to win!</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {this.state.winnerIndex != null && (
-          <View style={styles.winnerView}>
-            <Text style={styles.winnerText}>
-              You win {participants[this.state.winnerIndex]}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({ winnerIndex: null });
-                this.child._tryAgain();
-              }}
-              style={styles.tryAgainButton}
-            >
-              <Text style={styles.tryAgainText}>TRY AGAIN</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
+      <NativeBaseProvider>
+        <View style={styles.container}>
+          <StatusBar barStyle={"light-content"} />
+          <WheelOfFortune
+            options={wheelOptions}
+            getWinner={(value, index) => {
+              this.setState({ winnerValue: value, winnerIndex: index });
+            }}
+          />
+          {!this.state.started && (
+            <View style={styles.startButtonView}>
+              <TouchableOpacity
+                onPress={() => this.buttonPress()}
+                style={styles.startButton}
+              >
+                <Text style={styles.startButtonText}>Spin to win!</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {this.state.winnerIndex != null && (
+            <View style={styles.winnerView}>
+              <Text style={styles.winnerText}>
+                You win {participants[this.state.winnerIndex]}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({ winnerIndex: null });
+                  this.child._tryAgain();
+                }}
+                style={styles.tryAgainButton}
+              >
+                <Text style={styles.tryAgainText}>TRY AGAIN</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          <Footer selected="1" />
+        </View>
+      </NativeBaseProvider>
     );
   }
 }

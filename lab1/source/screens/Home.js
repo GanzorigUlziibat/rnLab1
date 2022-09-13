@@ -20,118 +20,30 @@ import {
   MaterialIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
+import Footer from "../components/footer/Footer";
 
 function HomeScreen({ navigation }) {
-  const [selected, setSelected] = React.useState(1);
   return (
     <NativeBaseProvider>
-      <Box>
-        <Button
-          title="DETAIL"
-          onPress={() => navigation.navigate("Detail")}
-        ></Button>
-      </Box>
-      <Box>
-        <Button onPress={() => navigation.navigate("About")}>ABOUT</Button>
-      </Box>
       <Box
         flex={1}
         bg="white"
         safeAreaTop
         width="100%"
-        maxW="300px"
+        // maxW="100%"
         alignSelf="center"
       >
-        <Center flex={1}></Center>
-        <HStack bg="indigo.600" alignItems="center" safeAreaBottom shadow={6}>
-          <Pressable
-            cursor="pointer"
-            opacity={selected === 0 ? 1 : 0.5}
-            py="3"
-            flex={1}
-            onPress={() => setSelected(0)}
-          >
-            <Center>
-              <Icon
-                mb="1"
-                as={
-                  <FontAwesome5 name={selected === 0 ? "oil-can" : "otter"} />
-                }
-                color="white"
-                size="sm"
-              />
-              <Text color="white" fontSize="12">
-                Home
-              </Text>
-            </Center>
-          </Pressable>
-          <Pressable
-            cursor="pointer"
-            opacity={selected === 1 ? 1 : 0.5}
-            py="2"
-            flex={1}
-            onPress={() => setSelected(1)}
-          >
-            <Center>
-              <Icon
-                mb="1"
-                as={<MaterialIcons name="search" />}
-                color="white"
-                size="sm"
-              />
-              <Text color="white" fontSize="12">
-                Search
-              </Text>
-            </Center>
-          </Pressable>
-          <Pressable
-            cursor="pointer"
-            opacity={selected === 2 ? 1 : 0.6}
-            py="2"
-            flex={1}
-            onPress={() => setSelected(2)}
-          >
-            <Center>
-              <Icon
-                mb="1"
-                as={
-                  <MaterialCommunityIcons
-                    name={selected === 2 ? "cart" : "cart-outline"}
-                  />
-                }
-                color="white"
-                size="sm"
-              />
-              <Text color="white" fontSize="12">
-                Cart
-              </Text>
-            </Center>
-          </Pressable>
-
-          <Pressable
-            cursor="pointer"
-            opacity={selected === 3 ? 1 : 0.5}
-            py="2"
-            flex={1}
-            onPress={() => setSelected(3)}
-          >
-            <Center>
-              <Icon
-                mb="1"
-                as={
-                  <MaterialCommunityIcons
-                    name={selected === 3 ? "account" : "account-outline"}
-                  />
-                }
-                color="white"
-                size="sm"
-              />
-              <Text color="white" fontSize="12">
-                Account
-              </Text>
-            </Center>
-          </Pressable>
-        </HStack>
+        <Box flex="1" safeAreaTop>
+          <Box>
+            <Button onPress={() => navigation.navigate("Detail")}>
+              DETAIL
+            </Button>
+          </Box>
+          <Box>
+            <Button onPress={() => navigation.navigate("About")}>ABOUT</Button>
+          </Box>
+        </Box>
+        <Footer selected="0" />
       </Box>
     </NativeBaseProvider>
   );
