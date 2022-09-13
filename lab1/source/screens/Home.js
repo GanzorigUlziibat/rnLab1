@@ -25,6 +25,15 @@ function HomeScreen({ navigation }) {
   const [selected, setSelected] = React.useState(1);
   return (
     <NativeBaseProvider>
+      <Box>
+        <Button
+          title="DETAIL"
+          onPress={() => navigation.navigate("Detail")}
+        ></Button>
+      </Box>
+      <Box>
+        <Button onPress={() => navigation.navigate("About")}>ABOUT</Button>
+      </Box>
       <Box
         flex={1}
         bg="white"
